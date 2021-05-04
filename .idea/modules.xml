@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MVVM_error_handling.iml" filepath="$PROJECT_DIR$/.idea/modules/MVVM_error_handling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.iml" />
+    </modules>
+  </component>
+</project>

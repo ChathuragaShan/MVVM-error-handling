@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MVVM error handling</string>
+    <string name="network_example_button_text">Network Example</string>
+    <string name="database_example_button_text">DataBase Example</string>
+</resources>
