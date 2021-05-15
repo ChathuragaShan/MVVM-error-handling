@@ -10,21 +10,5 @@
         android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/to_profile"
-            app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/to_register"
-            app:destination="@id/registerFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.RegisterFragment"
-        android:label="Register"
-        tools:layout="@layout/fragment_register"/>
 </navigation>

@@ -42,7 +42,7 @@ class NetworkService {
                 .addNetworkInterceptor(StethoInterceptor())
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(AccessTokenInterceptor())
+                .addInterceptor(MockInterceptor())
 
         val builder = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create())

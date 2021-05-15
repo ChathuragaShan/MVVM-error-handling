@@ -2,4 +2,22 @@
     <string name="app_name">MVVM error handling</string>
     <string name="network_example_button_text">Network Example</string>
     <string name="database_example_button_text">DataBase Example</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="user_name_label">Username</string>
+    <string name="empty_user_name_error">Username can not be empty</string>
+    <string name="user_name_with_space_error">Username can not contain any spaces</string>
+    <string name="email_label">Email</string>
+    <string name="empty_email_error_message">Email can not be empty</string>
+    <string name="email_with_space_error">Email can not contain any spaces</string>
+    <string name="password_label">Password</string>
+    <string name="empty_password_error">password can not be empty</string>
+    <string name="password_with_space_error">Password can not contain any spaces</string>
+    <string name="password_length_error">Password should contain at least 8 characters</string>
+    <string name="missing_number_in_password_error">Password should contain at least one number</string>
+    <string name="missing_upper_case_letter_in_password_error">Password should contain at least upper case letter</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="empty_confirm_password_error">Confirm password can not be empty</string>
+    <string name="confirm_password_with_space_error">Confirm password can not contain any spaces</string>
+    <string name="password_mismatch_error">Passwords are not matching</string>
+    <string name="register_button">Register</string>
 </resources>

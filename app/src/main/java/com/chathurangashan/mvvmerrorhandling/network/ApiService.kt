@@ -1,16 +1,12 @@
 package com.chathurangashan.mvvmerrorhandling.network
 
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
+import com.chathurangashan.mvvmerrorhandling.data.moshi.register_response.RegisterResponse
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 interface ApiService {
 
-//    @GET("user/{userId}")
-//    fun getProfile(@Path("userId") userId: String): Call<ProfileResponse>
-//
-//    @GET("post")
-//    suspend fun getPosts(@Query("page") page: Int, @Query("limit") limit: Int): Response<PostResponse>
+    @POST("users/register")
+    suspend fun registerUsers(@Body registerRequest: RegisterRequest): RegisterResponse
 }
