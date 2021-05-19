@@ -61,23 +61,6 @@ abstract class BaseFragment(layoutResource: Int) : Fragment(layoutResource) {
         }
     }
 
-    protected open fun showDialog(title: String?, message: String?, navigateUp: Boolean = true) {
-
-        if (title != null && message != null) {
-
-            MaterialDialog(requireContext()).show {
-                title(text = title)
-                message(text = message)
-                positiveButton(text = "OK")
-                positiveButton {
-                    if(navigateUp){
-                        navigationController.navigateUp()
-                    }
-                }
-            }
-        }
-    }
-
     protected open fun handleValidationError(operationError: OperationError){}
 
     protected open fun handleResponseError(operationError: OperationError){
@@ -97,6 +80,23 @@ abstract class BaseFragment(layoutResource: Int) : Fragment(layoutResource) {
             getString(value)
         }else{
             value.toString()
+        }
+    }
+
+    protected open fun showDialog(title: String?, message: String?, navigateUp: Boolean = true) {
+
+        if (title != null && message != null) {
+
+            MaterialDialog(requireContext()).show {
+                title(text = title)
+                message(text = message)
+                positiveButton(text = "OK")
+                positiveButton {
+                    if(navigateUp){
+                        navigationController.navigateUp()
+                    }
+                }
+            }
         }
     }
 

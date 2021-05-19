@@ -2,7 +2,7 @@
     <string name="app_name">MVVM error handling</string>
     <string name="network_example_button_text">Network Example</string>
     <string name="database_example_button_text">DataBase Example</string>
-    <string name="create_new_account">Create New Account</string>
+    <string name="create_new_account">Create a New Account</string>
     <string name="user_name_label">Username</string>
     <string name="empty_user_name_error">Username can not be empty</string>
     <string name="user_name_with_space_error">Username can not contain any spaces</string>

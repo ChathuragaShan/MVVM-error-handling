@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.network.ApiService
+import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
 import com.chathurangashan.mvvmerrorhandling.viewmodel.RegisterViewModel
 import retrofit2.HttpException
 import java.io.IOException
@@ -12,7 +13,7 @@ import javax.inject.Inject
 class RegisterRepository @Inject constructor(private val apiService: ApiService) :
     BaseRepository() {
 
-    val registerLiveData = MutableLiveData<String>()
+    val registerLiveData = MutableLiveData<SingleLiveEvent<String>>()
 
     suspend fun registerUser(requestBody: RegisterRequest) {
 
@@ -20,7 +21,7 @@ class RegisterRepository @Inject constructor(private val apiService: ApiService)
             val response = apiService.registerUsers(requestBody)
 
             if (response.status) {
-                registerLiveData.value = response.message
+                registerLiveData.value = SingleLiveEvent(response.message)
             } else {
 
                 val errors = mutableMapOf<String, String>()

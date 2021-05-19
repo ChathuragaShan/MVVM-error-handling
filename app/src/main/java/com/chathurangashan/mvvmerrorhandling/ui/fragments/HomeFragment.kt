@@ -42,7 +42,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun observeRegisterStatus(){
         viewModel.registerStatusLiveData.observe(viewLifecycleOwner){
-            showToast(it,Toast.LENGTH_LONG)
+            it.getContentIfNotHandled()?.let { toastMessage ->
+                showToast(toastMessage,Toast.LENGTH_LONG)
+            }
         }
     }
 

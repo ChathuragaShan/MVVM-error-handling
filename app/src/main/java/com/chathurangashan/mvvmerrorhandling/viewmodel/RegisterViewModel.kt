@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.repositories.RegisterRepository
+import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(private val repository: RegisterRepository)
     :BaseViewModel(repository) {
 
-    val registerStatusLiveData : LiveData<String>
+    val registerStatusLiveData : LiveData<SingleLiveEvent<String>>
 
     init {
         registerStatusLiveData = Transformations.map(repository.registerLiveData){
