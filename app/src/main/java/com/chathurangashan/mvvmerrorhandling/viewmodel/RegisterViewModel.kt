@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
+import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
 import com.chathurangashan.mvvmerrorhandling.repositories.RegisterRepository
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
 import kotlinx.coroutines.launch
@@ -19,14 +20,14 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
 
     init {
         registerStatusLiveData = Transformations.map(repository.registerLiveData){
-            isProcessing.value = false
+            isProcessing.value = ProcessingStatus.COMPLETED
             return@map it
         }
     }
 
     fun registerUser(requestBody: RegisterRequest){
 
-        isProcessing.value = true
+        isProcessing.value = ProcessingStatus.PROCESSING
         val isFormValid = validateRegisterForm(requestBody)
 
         if(isFormValid.first){

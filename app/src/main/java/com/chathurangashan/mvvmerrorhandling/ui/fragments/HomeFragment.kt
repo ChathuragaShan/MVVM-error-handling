@@ -37,7 +37,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         fragmentSubComponent = injector.fragmentComponent().create(requireView())
         fragmentSubComponent.inject(this)
 
-        super.initialization({ onDataProcessing() }, { onDataProcessingComplete() })
+        super.initialization({ onDataProcessing() },
+            { onDataProcessingCompleteOrError() },
+            { onDataProcessingCompleteOrError() })
     }
 
     private fun observeRegisterStatus(){
@@ -117,7 +119,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         viewBinding.registerButton.visibility = View.GONE
     }
 
-    private fun onDataProcessingComplete() {
+    private fun onDataProcessingCompleteOrError() {
         viewBinding.loadingIndicator.visibility = View.GONE
         viewBinding.registerButton.visibility = View.VISIBLE
     }
