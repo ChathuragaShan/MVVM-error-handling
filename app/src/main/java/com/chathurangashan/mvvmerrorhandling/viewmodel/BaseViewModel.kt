@@ -29,6 +29,11 @@ abstract class BaseViewModel(repository: BaseRepository): ViewModel() {
      */
     val operationErrorLiveData: MediatorLiveData<SingleLiveEvent<OperationError>> = MediatorLiveData()
 
+    /**
+     * List of errors related to the input field in UI with a relevant string key to identify
+     */
+    val fieldErrors = mutableMapOf<String,Any?> ()
+
     init {
 
         operationErrorLiveData.addSource(repository.operationErrorLiveDate){
@@ -43,7 +48,7 @@ abstract class BaseViewModel(repository: BaseRepository): ViewModel() {
 
     }
 
-    fun validationError(fieldErrors: Map<String, Any> = mapOf(), errorId: Int = 1){
+    fun validationError(fieldErrors: Map<String, Any?> = mapOf(), errorId: Int = 1){
 
         val operationError = OperationError
             .Builder(OperationErrorType.VALIDATION_ERROR)

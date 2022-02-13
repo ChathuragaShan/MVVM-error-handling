@@ -9,6 +9,7 @@
     <string name="email_label">Email</string>
     <string name="empty_email_error_message">Email can not be empty</string>
     <string name="email_with_space_error">Email can not contain any spaces</string>
+    <string name="invalid_email_error">Email is invalid</string>
     <string name="password_label">Password</string>
     <string name="empty_password_error">password can not be empty</string>
     <string name="password_with_space_error">Password can not contain any spaces</string>
