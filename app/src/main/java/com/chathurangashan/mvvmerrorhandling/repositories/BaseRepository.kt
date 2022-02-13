@@ -79,4 +79,41 @@ open class BaseRepository {
 
         operationErrorLiveDate.value = SingleLiveEvent(operationError)
     }
+
+    /**
+     * function use to create the [OperationError] object when network call failed to connect with
+     * the server with in the setup time out value
+     *
+     * @param errorId : This parameter is only use if there are multiple database or network operation
+     *                  occurs in the same screen and when it's errors need to be handle separately
+     */
+    fun timeoutConnectionError(errorId: Int = 1) {
+
+        val operationError = OperationError
+            .Builder(OperationErrorType.CONNECTION_ERROR)
+            .errorId(errorId)
+            .messageTitle("Connection Error")
+            .message("Failed to connect to the server please try again later.")
+            .build()
+
+        operationErrorLiveDate.value = SingleLiveEvent(operationError)
+    }
+
+    /**
+     * function use to create the [OperationError] object when device is not connected to the internet
+     *
+     * @param errorId : This parameter is only use if there are multiple database or network operation
+     *                  occurs in the same screen and when it's errors need to be handle separately
+     */
+    fun noConnectivityError(errorId: Int = 1) {
+
+        val operationError = OperationError
+            .Builder(OperationErrorType.CONNECTION_ERROR)
+            .errorId(errorId)
+            .messageTitle("Connection Error")
+            .message("Device is not connected to the internet. Please check your mobile internet connection.")
+            .build()
+
+        operationErrorLiveDate.value = SingleLiveEvent(operationError)
+    }
 }

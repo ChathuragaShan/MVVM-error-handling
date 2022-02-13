@@ -6,8 +6,10 @@ import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.network.ApiService
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
 import com.chathurangashan.mvvmerrorhandling.viewmodel.RegisterViewModel
+import com.chathurangashan.mvvmerrorhandling.network.ConnectivityInterceptor
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class RegisterRepository @Inject constructor(private val apiService: ApiService) :
@@ -39,16 +41,14 @@ class RegisterRepository @Inject constructor(private val apiService: ApiService)
                 responseError(response.message, errors)
             }
 
-        } catch (throwable: Throwable) {
+        } catch (exception: Exception) {
 
-            when (throwable) {
+            when (exception) {
+                is HttpException -> connectionError(exception.message())
+                is ConnectivityInterceptor.NoConnectivityException -> noConnectivityError()
+                is SocketTimeoutException -> timeoutConnectionError()
                 is IOException -> processingError()
-                is HttpException -> {
-                    connectionError(throwable.message())
-                }
-                else -> {
-                    processingError()
-                }
+                else -> processingError()
             }
 
         }
