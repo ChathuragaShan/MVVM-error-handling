@@ -1,5 +1,6 @@
 package com.chathurangashan.mvvmerrorhandling.network
 
+import android.content.Context
 import com.chathurangashan.mvvmerrorhandling.Config
 import com.chathurangashan.mvvmerrorhandling.ThisApplication
 import com.chathurangashan.mvvmerrorhandling.data.enums.BuildType
@@ -13,27 +14,34 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 class NetworkService {
 
     private var baseURL: String = ""
+    private lateinit var connectivityInterceptor: ConnectivityInterceptor
 
     companion object {
-        fun getInstance(): NetworkService {
-            return NetworkService()
+        fun getInstance(context: Context): NetworkService {
+            return NetworkService(context)
         }
 
-        fun getTestInstance(testUrl: HttpUrl): NetworkService {
-            return NetworkService(testUrl)
+        fun getTestInstance(context: Context,testUrl: HttpUrl): NetworkService {
+            return NetworkService(context, testUrl)
         }
     }
 
-    constructor(){
+    constructor(context: Context){
+
+        connectivityInterceptor = ConnectivityInterceptor(context)
         baseURL = when(ThisApplication.buildType){
             BuildType.RELEASE -> Config.LIVE_BASE_URL
             BuildType.DEVELOPMENT -> Config.DEV_BASE_URL
             BuildType.TESTING -> ""
         }
+
     }
 
-    constructor(testUrl: HttpUrl) : this() {
+    constructor(context: Context, testUrl: HttpUrl) : this(context) {
+
+        connectivityInterceptor = ConnectivityInterceptor(context)
         baseURL = testUrl.toString()
+
     }
 
     fun <S> getService(serviceClass: Class<S>): S {
@@ -42,6 +50,7 @@ class NetworkService {
                 .addNetworkInterceptor(StethoInterceptor())
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
+                .addInterceptor(connectivityInterceptor)
                 .addInterceptor(MockInterceptor())
 
         val builder = Retrofit.Builder()

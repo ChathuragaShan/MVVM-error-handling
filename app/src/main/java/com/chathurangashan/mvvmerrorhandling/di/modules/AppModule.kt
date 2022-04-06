@@ -1,5 +1,6 @@
 package com.chathurangashan.mvvmerrorhandling.di.modules
 
+import android.content.Context
 import com.chathurangashan.mvvmerrorhandling.network.ApiService
 import com.chathurangashan.mvvmerrorhandling.network.NetworkService
 import dagger.Module
@@ -11,5 +12,6 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit() = NetworkService.getInstance().getService(ApiService::class.java)
+    fun provideRetrofit(context: Context) =
+        NetworkService.getInstance(context).getService(ApiService::class.java)
 }

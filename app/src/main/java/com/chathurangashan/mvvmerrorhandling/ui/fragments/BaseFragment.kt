@@ -8,6 +8,7 @@ import com.chathurangashan.mvvmerrorhandling.data.enums.OperationErrorType
 import com.chathurangashan.mvvmerrorhandling.utilities.OperationError
 import com.chathurangashan.mvvmerrorhandling.viewmodel.BaseViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
 
 abstract class BaseFragment(layoutResource: Int) : Fragment(layoutResource) {
 
@@ -15,22 +16,34 @@ abstract class BaseFragment(layoutResource: Int) : Fragment(layoutResource) {
     protected abstract val viewModel: BaseViewModel
 
     protected open fun initialization(onDataProcessing: (() ->Unit)?,
-                                      onDataProcessingComplete: (() ->Unit)?) {
+                                      onDataProcessingComplete: (() ->Unit)?,
+                                      onDataProcessingError: (() ->Unit)?) {
         observeOperationError()
-        observeProcessingStatus(onDataProcessing,onDataProcessingComplete)
+        observeProcessingStatus(onDataProcessing,onDataProcessingComplete,onDataProcessingError)
     }
 
     private fun observeProcessingStatus(
         onDataProcessing: (() -> Unit)?,
-        onDataProcessingComplete: (() -> Unit)?
+        onDataProcessingComplete: (() -> Unit)?,
+        onDataProcessingError: (() ->Unit)?
     ) {
-        viewModel.isProcessing.observe(viewLifecycleOwner){
-            if(it){
-                onDataProcessing?.invoke()
-            }else{
-                onDataProcessingComplete?.invoke()
+        viewModel.isProcessing.observe(viewLifecycleOwner,{
+
+            when (it) {
+                ProcessingStatus.PROCESSING -> {
+                    onDataProcessing?.invoke()
+                }
+                ProcessingStatus.COMPLETED -> {
+                    onDataProcessingComplete?.invoke()
+                }
+                ProcessingStatus.ERROR -> {
+                    onDataProcessingError?.invoke()
+                }
+                else ->{
+                    Throwable("null processing status")
+                }
             }
-        }
+        })
     }
 
     private fun observeOperationError() {

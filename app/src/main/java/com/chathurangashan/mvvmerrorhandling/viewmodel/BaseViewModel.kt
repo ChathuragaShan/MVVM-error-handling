@@ -7,7 +7,7 @@ import com.chathurangashan.mvvmerrorhandling.data.enums.OperationErrorType
 import com.chathurangashan.mvvmerrorhandling.repositories.BaseRepository
 import com.chathurangashan.mvvmerrorhandling.utilities.OperationError
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
-
+import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
 
 abstract class BaseViewModel(repository: BaseRepository): ViewModel() {
 
@@ -21,7 +21,7 @@ abstract class BaseViewModel(repository: BaseRepository): ViewModel() {
      * Dedicated live data object to which use to communicate the data processing status to the UI
      * so that it can know when to hide and show loading animation
      */
-    val isProcessing = MutableLiveData<Boolean>()
+    val isProcessing = MutableLiveData<ProcessingStatus>()
 
     /**
      * Dedicated live data object which use to marge error details occurs in viewModel and
@@ -29,22 +29,26 @@ abstract class BaseViewModel(repository: BaseRepository): ViewModel() {
      */
     val operationErrorLiveData: MediatorLiveData<SingleLiveEvent<OperationError>> = MediatorLiveData()
 
+    /**
+     * List of errors related to the input field in UI with a relevant string key to identify
+     */
+    val fieldErrors = mutableMapOf<String,Any?> ()
+
     init {
 
         operationErrorLiveData.addSource(repository.operationErrorLiveDate){
+            isProcessing.value = ProcessingStatus.ERROR
             operationErrorLiveData.value = it
-            isProcessing.value = false
         }
 
         operationErrorLiveData.addSource(_operationErrorLiveData){
+            isProcessing.value = ProcessingStatus.ERROR
             operationErrorLiveData.value = it
-            isProcessing.value = false
-
         }
 
     }
 
-    fun validationError(fieldErrors: Map<String, Any> = mapOf(), errorId: Int = 1){
+    fun validationError(fieldErrors: Map<String, Any?> = mapOf(), errorId: Int = 1){
 
         val operationError = OperationError
             .Builder(OperationErrorType.VALIDATION_ERROR)

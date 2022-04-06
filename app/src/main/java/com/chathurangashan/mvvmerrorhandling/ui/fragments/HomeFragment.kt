@@ -3,6 +3,7 @@ package com.chathurangashan.mvvmerrorhandling.ui.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.NavController
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
@@ -30,6 +31,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         initialization()
         observeRegisterStatus()
         onClickRegisterButton()
+        usernameChangeListener()
+        emailChangeListener()
+        passwordChangeListener()
+        passwordConfirmChangeListener()
+
     }
 
     private fun initialization() {
@@ -37,18 +43,57 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         fragmentSubComponent = injector.fragmentComponent().create(requireView())
         fragmentSubComponent.inject(this)
 
-        super.initialization({ onDataProcessing() }, { onDataProcessingComplete() })
+        super.initialization({ onDataProcessing() },
+            { onDataProcessingCompleteOrError() },
+            { onDataProcessingCompleteOrError() })
     }
 
     private fun observeRegisterStatus(){
+
         viewModel.registerStatusLiveData.observe(viewLifecycleOwner){
             it.getContentIfNotHandled()?.let { toastMessage ->
                 showToast(toastMessage,Toast.LENGTH_LONG)
             }
         }
+
+    }
+
+    private fun usernameChangeListener(){
+
+        viewBinding.userNameEditText.doAfterTextChanged {
+            viewModel.usernameValidation(it.toString())
+        }
+
+    }
+
+    private fun emailChangeListener(){
+
+        viewBinding.emailEditText.doAfterTextChanged {
+            viewModel.emailValidation(it.toString())
+        }
+    }
+
+    private fun passwordChangeListener(){
+
+        viewBinding.passwordEditText.doAfterTextChanged {
+            viewModel.passwordValidation(it.toString())
+        }
+
+    }
+
+    private fun passwordConfirmChangeListener(){
+
+        viewBinding.passwordConfirmEditText.doAfterTextChanged {
+            viewModel.confirmPasswordValidation(
+                it.toString(),
+                viewBinding.passwordEditText.text.toString()
+            )
+        }
+
     }
 
     private fun onClickRegisterButton() {
+
         viewBinding.registerButton.setOnClickListener {
 
             val username = viewBinding.userNameEditText.text.toString()
@@ -66,35 +111,48 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             viewBinding.passwordConfirmInputLayout.isErrorEnabled = false
 
             val registerRequest = RegisterRequest(username, email, password, passwordConfirm)
-            viewModel.registerUser(registerRequest)
+            viewModel.validateRegisterForm(registerRequest)
+
+            if (viewModel.fieldErrors.filter { it.value != null }.isEmpty()) {
+                viewModel.registerUser(registerRequest)
+            }
 
         }
+
     }
 
-    private fun showFormErrors(fieldErrors: Map<String, Any>) {
+    private fun showFormErrors(fieldErrors: Map<String, Any?>) {
 
         fieldErrors.forEach {
+
             when (it.key) {
                 RegisterViewModel.usernameErrorKey -> {
-                    viewBinding.userNameInputLayout.error = resolveErrorResource(it.value)
-                    viewBinding.userNameInputLayout.isErrorEnabled = true
+                    viewBinding.userNameInputLayout.isErrorEnabled = it.value != null
+                    if(it.value != null) {
+                        viewBinding.userNameInputLayout.error = resolveErrorResource(it.value!!)
+                    }
                 }
                 RegisterViewModel.emailErrorKey -> {
-                    viewBinding.emailInputLayout.error = resolveErrorResource(it.value)
-                    viewBinding.emailInputLayout.isErrorEnabled = true
+                    viewBinding.emailInputLayout.isErrorEnabled = it.value != null
+                    if(it.value != null) {
+                        viewBinding.emailInputLayout.error = resolveErrorResource(it.value!!)
+                    }
                 }
                 RegisterViewModel.passwordErrorKey -> {
-                    viewBinding.passwordInputLayout.error =
-                        resolveErrorResource(it.value)
-                    viewBinding.passwordInputLayout.isErrorEnabled = true
+                    viewBinding.passwordInputLayout.isErrorEnabled = it.value != null
+                    if(it.value != null) {
+                        viewBinding.passwordInputLayout.error = resolveErrorResource(it.value!!)
+                    }
                 }
                 RegisterViewModel.confirmPasswordKey -> {
-                    viewBinding.passwordConfirmInputLayout.error =
-                        resolveErrorResource(it.value)
-                    viewBinding.passwordConfirmInputLayout.isErrorEnabled = true
+                    viewBinding.passwordConfirmInputLayout.isErrorEnabled = it.value != null
+                    if(it.value != null){
+                        viewBinding.passwordConfirmInputLayout.error = resolveErrorResource(it.value!!)
+                    }
                 }
             }
         }
+
     }
 
     override fun handleValidationError(operationError: OperationError) {
@@ -117,7 +175,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         viewBinding.registerButton.visibility = View.GONE
     }
 
-    private fun onDataProcessingComplete() {
+    private fun onDataProcessingCompleteOrError() {
         viewBinding.loadingIndicator.visibility = View.GONE
         viewBinding.registerButton.visibility = View.VISIBLE
     }
