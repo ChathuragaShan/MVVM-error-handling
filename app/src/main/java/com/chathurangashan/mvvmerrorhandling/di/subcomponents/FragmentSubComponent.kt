@@ -3,7 +3,9 @@ package com.chathurangashan.mvvmerrorhandling.di.subcomponents
 import android.view.View
 import com.chathurangashan.mvvmerrorhandling.di.scopes.FragmentScope
 import com.chathurangashan.mvvmerrorhandling.di.modules.FragmentModule
-import com.chathurangashan.mvvmerrorhandling.ui.fragments.HomeFragment
+import com.chathurangashan.mvvmerrorhandling.ui.fragments.LoginFragment
+import com.chathurangashan.mvvmerrorhandling.ui.fragments.RegisterFragment
+import com.chathurangashan.mvvmerrorhandling.ui.fragments.WelcomeFragment
 import com.chathurangashan.mvvmerrorhandling.viewmodel.RegisterViewModel
 import dagger.BindsInstance
 import dagger.Subcomponent
@@ -17,7 +19,11 @@ interface FragmentSubComponent {
         fun create(@BindsInstance view: View): FragmentSubComponent
     }
 
-    fun inject(fragment: HomeFragment)
+    fun inject(fragment: WelcomeFragment)
+
+    fun inject(fragment: LoginFragment)
+
+    fun inject(fragment: RegisterFragment)
     val registerViewModel: RegisterViewModel
 
 }

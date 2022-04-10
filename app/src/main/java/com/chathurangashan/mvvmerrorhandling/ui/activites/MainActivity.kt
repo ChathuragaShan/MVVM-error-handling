@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
 
-        if(navigationController.currentDestination?.id == R.id.homeFragment){
+        if(navigationController.currentDestination?.id == R.id.welcomeFragment){
             moveTaskToBack(true)
         }else{
             navigationController.navigateUp()

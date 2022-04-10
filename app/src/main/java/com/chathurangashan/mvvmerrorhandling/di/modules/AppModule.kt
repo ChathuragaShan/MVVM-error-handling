@@ -1,8 +1,8 @@
 package com.chathurangashan.mvvmerrorhandling.di.modules
 
 import android.content.Context
-import com.chathurangashan.mvvmerrorhandling.network.ApiService
-import com.chathurangashan.mvvmerrorhandling.network.NetworkService
+import android.content.SharedPreferences
+import android.content.Context.MODE_PRIVATE
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,6 +12,6 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(context: Context) =
-        NetworkService.getInstance(context).getService(ApiService::class.java)
+    fun provideSharedPreferences(context: Context): SharedPreferences =
+        context.getSharedPreferences("com.chathurangashan.mvvmerrorhandling", MODE_PRIVATE)
 }

@@ -2,6 +2,7 @@ package com.chathurangashan.mvvmerrorhandling.di
 
 import android.content.Context
 import com.chathurangashan.mvvmerrorhandling.di.modules.AppModule
+import com.chathurangashan.mvvmerrorhandling.di.modules.NetworkModule
 import com.chathurangashan.mvvmerrorhandling.di.subcomponents.ActivitySubComponent
 import com.chathurangashan.mvvmerrorhandling.di.subcomponents.FragmentSubComponent
 import com.chathurangashan.mvvmerrorhandling.di.subcomponents.SubComponentModule
@@ -12,7 +13,7 @@ import dagger.Module
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AssistedInjectModule::class, AppModule::class, SubComponentModule::class])
+@Component(modules = [AssistedInjectModule::class, AppModule::class, NetworkModule::class, SubComponentModule::class])
 interface ApplicationComponent {
 
     @Component.Factory

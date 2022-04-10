@@ -7,7 +7,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.NavController
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
-import com.chathurangashan.mvvmerrorhandling.databinding.FragmentHomeBinding
+import com.chathurangashan.mvvmerrorhandling.databinding.FragmentRegisterBinding
 import com.chathurangashan.mvvmerrorhandling.di.injector
 import com.chathurangashan.mvvmerrorhandling.di.subcomponents.FragmentSubComponent
 import com.chathurangashan.mvvmerrorhandling.di.viewModel
@@ -15,18 +15,18 @@ import com.chathurangashan.mvvmerrorhandling.utilities.OperationError
 import com.chathurangashan.mvvmerrorhandling.viewmodel.RegisterViewModel
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class RegisterFragment : BaseFragment(R.layout.fragment_register) {
 
     @Inject
     override lateinit var navigationController: NavController
     override val viewModel by viewModel { fragmentSubComponent.registerViewModel }
 
     private lateinit var fragmentSubComponent: FragmentSubComponent
-    private lateinit var viewBinding: FragmentHomeBinding
+    private lateinit var viewBinding: FragmentRegisterBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewBinding = FragmentHomeBinding.bind(view)
+        viewBinding = FragmentRegisterBinding.bind(view)
 
         initialization()
         observeRegisterStatus()

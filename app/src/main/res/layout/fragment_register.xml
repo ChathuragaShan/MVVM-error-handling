@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.HomeFragment">
+    tools:context=".ui.fragments.RegisterFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -20,10 +20,10 @@
 
             <TextView
                 android:id="@+id/title"
+                style="@style/primaryTitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/create_new_account"
-                android:textSize="25sp"/>
+                android:text="@string/create_new_account" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/userNameInputLayout"

@@ -1,5 +1,6 @@
 package com.chathurangashan.mvvmerrorhandling.network
 
+import android.content.SharedPreferences
 import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.data.moshi.register_response.Error
 import com.chathurangashan.mvvmerrorhandling.data.moshi.register_response.RegisterResponse
@@ -13,7 +14,7 @@ import java.io.IOException
 /**
  * Network interceptor class that act as a remote server which supply the response accordingly
  */
-class MockInterceptor : Interceptor {
+class MockInterceptor (val sharedPreferences: SharedPreferences) : Interceptor {
 
     // Mock list of all user names represent the all the users in remote server data base
     private val allUserNames = listOf(
@@ -80,6 +81,7 @@ class MockInterceptor : Interceptor {
 
         val username = registerRequest.userName
         val email = registerRequest.email
+        val password = registerRequest.password
 
         val moshi = Moshi.Builder().build()
         val jsonAdapter = moshi.adapter(RegisterResponse::class.java)

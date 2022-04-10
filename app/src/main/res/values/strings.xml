@@ -21,4 +21,9 @@
     <string name="confirm_password_with_space_error">Confirm password can not contain any spaces</string>
     <string name="password_mismatch_error">Passwords are not matching</string>
     <string name="register_button">Register</string>
+
+    <string name="welcome_title">Welcome to the \n Happy Plants</string>
+    <string name="login_button_text">Login</string>
+    <string name="register_button_text">Register</string>
+
 </resources>
