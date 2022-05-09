@@ -86,6 +86,3 @@ lint/tmp/
 
 # Android Profiling
 *.hprof/build
-
-#kotlin config file
-src/main/java/com/chathurangashan/mvvmerrorhandling/Config.kt
