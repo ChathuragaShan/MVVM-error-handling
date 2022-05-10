@@ -4,47 +4,37 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.chathurangashan.mvvmerrorhandling.R
-import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
-import com.chathurangashan.mvvmerrorhandling.repositories.RegisterRepository
+import com.chathurangashan.mvvmerrorhandling.data.general.LoginDetails
+import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.LoginRequest
+import com.chathurangashan.mvvmerrorhandling.repositories.LoginRepository
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+class LoginViewModel @Inject constructor(val repository: LoginRepository): BaseViewModel(repository){
 
-class RegisterViewModel @Inject constructor(private val repository: RegisterRepository)
-    :BaseViewModel(repository) {
-
-    val registerStatusLiveData : LiveData<SingleLiveEvent<String>>
+    val loginStatusLiveData : LiveData<SingleLiveEvent<LoginDetails>>
 
     init {
-        registerStatusLiveData = Transformations.map(repository.registerLiveData){
+
+        loginStatusLiveData = Transformations.map(repository.loginLiveData){
             isProcessing.value = ProcessingStatus.COMPLETED
             return@map it
         }
+
     }
 
-    fun registerUser(requestBody: RegisterRequest){
+    fun loginUser(loginRequest: LoginRequest){
 
         viewModelScope.launch {
+
             isProcessing.value = ProcessingStatus.PROCESSING
-            repository.registerUser(requestBody)
+            repository.login(loginRequest)
+
         }
 
-    }
-
-    fun usernameValidation(userName: String){
-
-        if(userName.isBlank()){
-            fieldErrors[usernameErrorKey] = R.string.empty_user_name_error
-        }else if(userName.matches(".*\\s.*".toRegex())){
-            fieldErrors[usernameErrorKey] = R.string.user_name_with_space_error
-        }else{
-            fieldErrors[usernameErrorKey] = null
-        }
-
-        validationError(fieldErrors)
     }
 
     fun emailValidation(email: String){
@@ -60,6 +50,7 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
         }
 
         validationError(fieldErrors)
+
     }
 
     fun passwordValidation(password: String){
@@ -81,41 +72,20 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
         validationError(fieldErrors)
     }
 
-    fun confirmPasswordValidation(password: String ,confirmPassword: String){
-
-        if(confirmPassword.isBlank()){
-            fieldErrors[confirmPasswordKey] = R.string.empty_confirm_password_error
-        }else if(confirmPassword.matches(".*\\s.*".toRegex())){
-            fieldErrors[confirmPasswordKey] = R.string.confirm_password_with_space_error
-        }else if(confirmPassword != password){
-            fieldErrors[confirmPasswordKey] = R.string.password_mismatch_error
-        }else{
-            fieldErrors[confirmPasswordKey] = null
-        }
-
-        validationError(fieldErrors)
-
-    }
-
     /**
-     * Function responsible for doing form validation before make the register network call
+     * Function responsible for doing form validation before make the login network call
      *
-     * @param requestBody: request body data which contains user entered form details
+     * @param requestBody: request body data which contains user entered form details.
      */
-    fun validateRegisterForm(requestBody: RegisterRequest) {
+    fun validateLoginForm(requestBody: LoginRequest){
 
-        usernameValidation(requestBody.userName)
         emailValidation(requestBody.email)
         passwordValidation(requestBody.password)
-        confirmPasswordValidation(requestBody.password, requestBody.confirmPassword)
 
     }
 
     companion object {
-        const val usernameErrorKey = "usernameFiled"
         const val emailErrorKey = "emailFiled"
         const val passwordErrorKey = "passwordField"
-        const val confirmPasswordKey = "confirmPasswordField"
     }
-
 }

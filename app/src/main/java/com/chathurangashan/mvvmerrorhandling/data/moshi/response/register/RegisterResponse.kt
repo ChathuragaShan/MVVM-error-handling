@@ -1,6 +1,6 @@
-package com.chathurangashan.mvvmerrorhandling.data.moshi.register_response
+package com.chathurangashan.mvvmerrorhandling.data.moshi.response.register
 
-
+import com.chathurangashan.mvvmerrorhandling.data.moshi.InputError
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -11,5 +11,5 @@ data class RegisterResponse(
         @Json(name = "message")
         val message: String,
         @Json(name = "errors")
-        val errors: List<Error>?
+        val errors: List<InputError>?
 )

@@ -6,6 +6,7 @@ import com.chathurangashan.mvvmerrorhandling.di.modules.FragmentModule
 import com.chathurangashan.mvvmerrorhandling.ui.fragments.LoginFragment
 import com.chathurangashan.mvvmerrorhandling.ui.fragments.RegisterFragment
 import com.chathurangashan.mvvmerrorhandling.ui.fragments.WelcomeFragment
+import com.chathurangashan.mvvmerrorhandling.viewmodel.LoginViewModel
 import com.chathurangashan.mvvmerrorhandling.viewmodel.RegisterViewModel
 import dagger.BindsInstance
 import dagger.Subcomponent
@@ -21,9 +22,10 @@ interface FragmentSubComponent {
 
     fun inject(fragment: WelcomeFragment)
 
-    fun inject(fragment: LoginFragment)
-
     fun inject(fragment: RegisterFragment)
     val registerViewModel: RegisterViewModel
+
+    fun inject(fragment: LoginFragment)
+    val loginViewModel: LoginViewModel
 
 }

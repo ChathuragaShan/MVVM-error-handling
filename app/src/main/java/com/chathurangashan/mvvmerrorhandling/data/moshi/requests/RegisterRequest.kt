@@ -1,4 +1,4 @@
-package com.chathurangashan.mvvmerrorhandling.data.moshi
+package com.chathurangashan.mvvmerrorhandling.data.moshi.requests
 
 
 import com.squareup.moshi.Json

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.NavController
 import com.chathurangashan.mvvmerrorhandling.R
-import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
+import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.databinding.FragmentRegisterBinding
 import com.chathurangashan.mvvmerrorhandling.di.injector
 import com.chathurangashan.mvvmerrorhandling.di.subcomponents.FragmentSubComponent
@@ -53,6 +53,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
         viewModel.registerStatusLiveData.observe(viewLifecycleOwner){
             it.getContentIfNotHandled()?.let { toastMessage ->
                 showToast(toastMessage,Toast.LENGTH_LONG)
+                navigationController.navigateUp()
             }
         }
 
@@ -166,7 +167,7 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
         if (!operationError.fieldErrors.isNullOrEmpty()) {
             showFormErrors(operationError.fieldErrors)
         }else{
-            showDialog(operationError.messageTitle,operationError.message)
+            showDialog(operationError.messageTitle,operationError.message,false)
         }
     }
 
