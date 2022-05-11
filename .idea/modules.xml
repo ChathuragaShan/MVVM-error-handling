@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MVVM_error_handling.iml" filepath="$PROJECT_DIR$/.idea/modules/MVVM_error_handling.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MVVM_error_handling.app.unitTest.iml" />
     </modules>
   </component>
 </project>

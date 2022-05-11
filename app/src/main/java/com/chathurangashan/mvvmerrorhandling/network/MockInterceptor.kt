@@ -1,11 +1,14 @@
 package com.chathurangashan.mvvmerrorhandling.network
 
 import android.content.SharedPreferences
+import com.chathurangashan.mvvmerrorhandling.R
+import com.chathurangashan.mvvmerrorhandling.data.general.Plant
 import com.chathurangashan.mvvmerrorhandling.data.moshi.InputError
 import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.LoginRequest
 import com.chathurangashan.mvvmerrorhandling.data.moshi.response.login.Data
 import com.chathurangashan.mvvmerrorhandling.data.moshi.response.login.LoginResponse
+import com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.PlantResponse
 import com.chathurangashan.mvvmerrorhandling.data.moshi.response.register.RegisterResponse
 import com.squareup.moshi.Moshi
 import okhttp3.*
@@ -46,6 +49,10 @@ class MockInterceptor (val sharedPreferences: SharedPreferences) : Interceptor {
 
             val loginRequestBody = getRequestBody<LoginRequest>(request)
             return processLoginResponse(request,loginRequestBody)
+
+        }else if(url.endsWith("items/plants")){
+
+            return processPlantsResponse(request)
         }
 
         return chain.proceed(request)
@@ -162,6 +169,51 @@ class MockInterceptor (val sharedPreferences: SharedPreferences) : Interceptor {
 
         }
 
+    }
+
+    /**
+     * Responsible for returning plant list response accordingly.
+     */
+    private fun processPlantsResponse(request: Request): Response{
+
+        val moshi = Moshi.Builder().build()
+        val jsonAdapter = moshi.adapter(PlantResponse::class.java)
+
+        val plantResponse = PlantResponse(
+            true,
+            "Success",
+            mutableListOf(
+                com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.Data(
+                    1,"Peperomia Obtusifolia", R.drawable.peperomia_obtusifolia,72.00
+                ),
+                com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.Data(
+                    2,"ZZ Plant", R.drawable.zz_plant,68.00
+                ),
+                com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.Data(
+                    3,"Ric Rac Cactus", R.drawable.ric_rac_cactus,48.00
+                ),
+                com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.Data(
+                    4,"Philodendron Green", R.drawable.philodendron_green,70.00
+                ),
+                com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.Data(
+                    5,"Jade Plant", R.drawable.jade_plant,58.00
+                ),
+                com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.Data(
+                    6,"Silver Satin", R.drawable.silver_satin,52.00
+                )
+
+            ),
+            null
+        )
+
+        return Response.Builder()
+            .code(200)
+            .request(request)
+            .protocol(Protocol.HTTP_1_1)
+            .message("Success")
+            .body(jsonAdapter.toJson(plantResponse)
+                .toResponseBody("application/json".toMediaType()))
+            .build()
     }
 
     private fun isUserNameExist(username: String): Boolean{

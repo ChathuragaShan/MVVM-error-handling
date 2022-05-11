@@ -51,7 +51,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         viewModel.loginStatusLiveData.observe(viewLifecycleOwner){
             it.getContentIfNotHandled()?.let { toastMessage ->
                 showToast(toastMessage.message, Toast.LENGTH_LONG)
-                //Navigate to home screen
+                navigationController.navigate(R.id.to_plants)
             }
         }
 

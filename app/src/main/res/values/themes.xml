@@ -35,4 +35,17 @@
         <item name="cornerRadius">4dp</item>
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="secondaryTitleStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="priceStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

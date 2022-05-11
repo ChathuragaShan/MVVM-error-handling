@@ -26,5 +26,14 @@
         android:id="@+id/loginFragment"
         android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/to_plants"
+            app:destination="@id/plantsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantsFragment"
+        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.PlantsFragment"
+        android:label="Plants"
+        tools:layout="@layout/fragment_plants" />
 </navigation>
