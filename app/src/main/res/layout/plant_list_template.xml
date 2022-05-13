@@ -47,7 +47,7 @@
 
             <TextView
                 android:id="@+id/price"
-                style="@style/priceStyle"
+                style="@style/ternaryTitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"

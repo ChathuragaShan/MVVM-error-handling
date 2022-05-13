@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/rounded_title_background.xml" value="0.3135" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2518518518518518" />
+        <entry key="app/src/main/res/layout/fragment_plant_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_plants.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2518518518518518" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.287962962962963" />

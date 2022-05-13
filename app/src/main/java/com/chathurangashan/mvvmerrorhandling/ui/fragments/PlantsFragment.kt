@@ -61,6 +61,9 @@ class PlantsFragment : BaseFragment(R.layout.fragment_plants) {
 
     private fun onSelectPlant(position: Int) {
 
+        val plantDetailsDirection = PlantsFragmentDirections.toPlantDetails(position)
+        navigationController.navigate(plantDetailsDirection)
+
     }
 
     private fun onDataProcessing(){

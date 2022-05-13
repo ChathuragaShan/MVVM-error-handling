@@ -19,12 +19,24 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_loginFragment_to_plantsFragment">
+                            <entry key="to_plants">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="plantDetailFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="470" />
+                            <option name="y" value="322" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

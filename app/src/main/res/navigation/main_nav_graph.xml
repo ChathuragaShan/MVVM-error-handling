@@ -35,5 +35,18 @@
         android:id="@+id/plantsFragment"
         android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.PlantsFragment"
         android:label="Plants"
-        tools:layout="@layout/fragment_plants" />
+        tools:layout="@layout/fragment_plants" >
+        <action
+            android:id="@+id/to_plant_details"
+            app:destination="@id/plantDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantDetailFragment"
+        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.PlantDetailFragment"
+        android:label="Plant Details"
+        tools:layout="@layout/fragment_plant_detail">
+        <argument
+            android:name="plant_Id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

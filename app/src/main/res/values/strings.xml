@@ -26,4 +26,28 @@
     <string name="login_button_text">Login</string>
     <string name="register_button_text">Register</string>
 
+    <string name="peperomia_obtusifolia_description">
+        The Peperomia obtusifolia, also known as the baby rubber plant, is an easy-going houseplant characterized by its thick, succulent-like green leaves. A popular variety of Peperomia, it does not need much to thrive and might even reward you with white flower spikes once a year.
+    </string>
+
+    <string name="zz_plant_description">
+        The ZZ Plant is characterized by its waxy green leaves above the surface of its potting mix, and its large potato-like rhizomes underneath. These rhizomes store water, making the ZZ a hardy, drought-tolerant houseplant that only needs water every few weeks.
+    </string>
+
+    <string name="ric_rac_cactus_description">
+        The Ric Rac Cactus will win over any plant parent: Not only is it pet-friendly and easy to care for, but it offers ric rac- or fishbone-shaped trailing stems and the occasional night-blooming flower. It is considered non-toxic, safe to keep around curious cats and dogs.
+    </string>
+
+    <string name="philodendron_green_description">
+        Why is the Philodendron our most popular plant year after year? It could be its heart-shaped green leaves, easy-going nature, or quick-growing trailing vines. Snag this low-maintenance houseplant now to bring life to your space during the winter months ahead.
+    </string>
+
+    <string name="jade_plant_description">
+        The Jade Plant, or Crassula ovata, is a popular succulent with thick, fleshy leaves and a preference for bright light and infrequent waterings. It is sometimes called a money plant or lucky plant, and is said to bring financial prosperity to those who grow it. Who said money doesn’t grow on trees?
+    </string>
+
+    <string name="silver_satin_description">
+        The Silver Satin vine, or Scindapsus pictus, is a low-maintenance plant that will add a bit of flair to any sill or shelf with its silvery variegation that catches and reflects light. Added bonus—it is easy to propagate a cutting of this plant in water!
+    </string>
+
 </resources>

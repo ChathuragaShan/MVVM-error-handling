@@ -1,11 +1,11 @@
 package com.chathurangashan.mvvmerrorhandling.data.general
 
 data class PlantDetails(
+    val id: Int,
     val name: String,
     val image: Int,
-    val price: Int,
+    val price: Double,
     val sizes: List<String>,
-    val planter: List<String>,
-    val colors: List<Int>,
-    val description: String
+    val planters: List<String>,
+    val description: Int
 )

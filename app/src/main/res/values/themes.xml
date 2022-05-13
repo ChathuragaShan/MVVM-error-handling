@@ -42,10 +42,25 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="priceStyle" parent="Widget.AppCompat.TextView">
+    <style name="ternaryTitleStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/dark_gray</item>
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="descriptionTestStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="iconSize">20dp</item>
     </style>
 
 </resources>

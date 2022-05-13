@@ -2,19 +2,20 @@ package com.chathurangashan.mvvmerrorhandling.network
 
 import android.content.SharedPreferences
 import com.chathurangashan.mvvmerrorhandling.R
-import com.chathurangashan.mvvmerrorhandling.data.general.Plant
 import com.chathurangashan.mvvmerrorhandling.data.moshi.InputError
-import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.LoginRequest
+import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.data.moshi.response.login.Data
 import com.chathurangashan.mvvmerrorhandling.data.moshi.response.login.LoginResponse
 import com.chathurangashan.mvvmerrorhandling.data.moshi.response.plant.PlantResponse
+import com.chathurangashan.mvvmerrorhandling.data.moshi.response.plantdetails.PlantDetailResponse
 import com.chathurangashan.mvvmerrorhandling.data.moshi.response.register.RegisterResponse
 import com.squareup.moshi.Moshi
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.Buffer
+
 
 /**
  * Network interceptor class that act as a remote server which supply the response accordingly
@@ -53,6 +54,11 @@ class MockInterceptor (val sharedPreferences: SharedPreferences) : Interceptor {
         }else if(url.endsWith("items/plants")){
 
             return processPlantsResponse(request)
+
+        }else if(url.contains("items/plantDetails/")){
+
+            val plantId = request.url.pathSegments[2].toInt()
+            return processPlantDetailResponse(request,plantId)
         }
 
         return chain.proceed(request)
@@ -214,6 +220,59 @@ class MockInterceptor (val sharedPreferences: SharedPreferences) : Interceptor {
             .body(jsonAdapter.toJson(plantResponse)
                 .toResponseBody("application/json".toMediaType()))
             .build()
+    }
+
+    private fun processPlantDetailResponse(request: Request,plantId: Int): Response{
+
+        val moshi = Moshi.Builder().build()
+        val jsonAdapter = moshi.adapter(PlantDetailResponse::class.java)
+
+        val sizes = mutableListOf("Small-5\"","Medium-7\"")
+        val planters = mutableListOf("Grow Pot","Grant","Hyde")
+
+        val data = mutableListOf(
+            com.chathurangashan.mvvmerrorhandling.data.moshi.response.plantdetails.Data(
+                1,"Peperomia Obtusifolia", R.drawable.peperomia_obtusifolia,72.00,
+                sizes,planters,R.string.peperomia_obtusifolia_description
+            ),
+            com.chathurangashan.mvvmerrorhandling.data.moshi.response.plantdetails.Data(
+                2,"ZZ Plant", R.drawable.zz_plant,68.00,
+                sizes,planters,R.string.zz_plant_description
+            ),
+            com.chathurangashan.mvvmerrorhandling.data.moshi.response.plantdetails.Data(
+                3,"Ric Rac Cactus", R.drawable.ric_rac_cactus,48.00,
+                sizes,planters,R.string.ric_rac_cactus_description
+            ),
+            com.chathurangashan.mvvmerrorhandling.data.moshi.response.plantdetails.Data(
+                4,"Philodendron Green", R.string.philodendron_green_description,70.00,
+                sizes,planters,R.string.philodendron_green_description
+            ),
+            com.chathurangashan.mvvmerrorhandling.data.moshi.response.plantdetails.Data(
+                5,"Jade Plant", R.string.jade_plant_description,58.00,
+                sizes,planters,R.string.jade_plant_description
+            ),
+            com.chathurangashan.mvvmerrorhandling.data.moshi.response.plantdetails.Data(
+                6,"Silver Satin", R.drawable.silver_satin,52.00,
+                sizes,planters,R.string.silver_satin_description
+            )
+        )
+
+        val plantDetailResponse = PlantDetailResponse(
+            true,
+            "Success",
+            data[plantId],
+            null
+        )
+
+        return Response.Builder()
+            .code(200)
+            .request(request)
+            .protocol(Protocol.HTTP_1_1)
+            .message("Success")
+            .body(jsonAdapter.toJson(plantDetailResponse)
+                .toResponseBody("application/json".toMediaType()))
+            .build()
+
     }
 
     private fun isUserNameExist(username: String): Boolean{
