@@ -1,32 +1,32 @@
-package com.chathurangashan.mvvmerrorhandling.di.modules
+package com.chathurangashan.mvvmerrorhandling.di
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.chathurangashan.mvvmerrorhandling.network.ApiService
-import com.chathurangashan.mvvmerrorhandling.network.MockInterceptor
 import com.chathurangashan.mvvmerrorhandling.network.ConnectivityInterceptor
+import com.chathurangashan.mvvmerrorhandling.network.MockInterceptor
 import dagger.Module
 import dagger.Provides
-import okhttp3.HttpUrl
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
-@Module (includes = [AppModule::class])
-class NetworkModule {
+@InstallIn(SingletonComponent::class)
+@Module
+object NetworkModule {
 
-    @Singleton
+    @Provides
+    fun provideConnectivityInterceptor(@ApplicationContext context: Context) =
+        ConnectivityInterceptor(context)
+
     @Provides
     fun provideMockInterceptor(sharedPreferences: SharedPreferences) =
         MockInterceptor(sharedPreferences)
 
-    @Singleton
-    @Provides
-    fun provideConnectivityInterceptor(context: Context) = ConnectivityInterceptor(context)
-
-    @Singleton
     @Provides
     fun provideHttpClient(connectivityInterceptor: ConnectivityInterceptor,
                           mockInterceptor: MockInterceptor): OkHttpClient.Builder {
@@ -38,20 +38,20 @@ class NetworkModule {
             .addInterceptor(mockInterceptor)
     }
 
-    @Singleton
     @Provides
     fun baseURL() =  "https://dummyurl.com"
 
-    @Singleton
+
     @Provides
     fun provideRetrofit(baseURL: String, httpClient: OkHttpClient.Builder): ApiService {
 
-        val retrofit = Retrofit.Builder()
+        val retrofit =  Retrofit.Builder()
             .baseUrl(baseURL)
-            .addConverterFactory(MoshiConverterFactory.create())
             .client(httpClient.build())
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
         return retrofit.create(ApiService::class.java)
+
     }
 }

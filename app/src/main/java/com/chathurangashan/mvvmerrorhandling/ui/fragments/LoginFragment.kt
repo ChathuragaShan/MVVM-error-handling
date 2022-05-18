@@ -4,29 +4,30 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.LoginRequest
 import com.chathurangashan.mvvmerrorhandling.databinding.FragmentLoginBinding
-import com.chathurangashan.mvvmerrorhandling.di.injector
-import com.chathurangashan.mvvmerrorhandling.di.subcomponents.FragmentSubComponent
-import com.chathurangashan.mvvmerrorhandling.di.viewModel
+import com.chathurangashan.mvvmerrorhandling.di.navigation.FragmentNavigator
 import com.chathurangashan.mvvmerrorhandling.utilities.OperationError
 import com.chathurangashan.mvvmerrorhandling.viewmodel.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     @Inject
+    lateinit var navigator: FragmentNavigator
     override lateinit var navigationController: NavController
     private lateinit var viewBinding: FragmentLoginBinding
-    private lateinit var fragmentSubComponent: FragmentSubComponent
-
-    override val viewModel by viewModel { fragmentSubComponent.loginViewModel }
+    override val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewBinding = FragmentLoginBinding.bind(view)
+        navigationController = navigator.getNaveHostFragment(view)
 
         initialization()
         observeLoginStatus()
@@ -37,9 +38,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun initialization() {
-
-        fragmentSubComponent = injector.fragmentComponent().create(requireView())
-        fragmentSubComponent.inject(this)
 
         super.initialization({ onDataProcessing() },
             { onDataProcessingCompleteOrError() },

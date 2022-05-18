@@ -2,38 +2,29 @@ package com.chathurangashan.mvvmerrorhandling.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.NavController
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.databinding.FragmentWelcomeBinding
-import com.chathurangashan.mvvmerrorhandling.di.injector
-import com.chathurangashan.mvvmerrorhandling.di.subcomponents.FragmentSubComponent
+import com.chathurangashan.mvvmerrorhandling.di.navigation.FragmentNavigator
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
 
-    private lateinit var viewBinding: FragmentWelcomeBinding
-    private lateinit var fragmentSubComponent: FragmentSubComponent
-
     @Inject
+    lateinit var navigator: FragmentNavigator
     lateinit var navigationController: NavController
+    private lateinit var viewBinding: FragmentWelcomeBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewBinding = FragmentWelcomeBinding.bind(view)
+        navigationController = navigator.getNaveHostFragment(view)
 
-        initialization()
         onClickLogin()
         onClickRegister()
-    }
-
-    private fun initialization() {
-
-        fragmentSubComponent = injector.fragmentComponent().create(requireView())
-        fragmentSubComponent.inject(this)
     }
 
     private fun onClickLogin(){

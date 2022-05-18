@@ -9,10 +9,12 @@ import com.chathurangashan.mvvmerrorhandling.data.general.LoginDetails
 import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.LoginRequest
 import com.chathurangashan.mvvmerrorhandling.repositories.LoginRepository
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+@HiltViewModel
 class LoginViewModel @Inject constructor(val repository: LoginRepository): BaseViewModel(repository){
 
     val loginStatusLiveData : LiveData<SingleLiveEvent<LoginDetails>>

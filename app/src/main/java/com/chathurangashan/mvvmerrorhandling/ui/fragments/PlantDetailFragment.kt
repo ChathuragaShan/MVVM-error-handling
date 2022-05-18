@@ -2,32 +2,44 @@ package com.chathurangashan.mvvmerrorhandling.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.databinding.FragmentPlantDetailBinding
-import com.chathurangashan.mvvmerrorhandling.di.injector
-import com.chathurangashan.mvvmerrorhandling.di.subcomponents.FragmentSubComponent
+import com.chathurangashan.mvvmerrorhandling.di.navigation.FragmentNavigator
 import com.chathurangashan.mvvmerrorhandling.viewmodel.PlantDetailsViewModel
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import java.text.DecimalFormat
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class PlantDetailFragment : BaseFragment(R.layout.fragment_plant_detail) {
 
-    override lateinit var viewModel: PlantDetailsViewModel
-    private lateinit var fragmentSubComponent: FragmentSubComponent
-    private lateinit var viewBinding: FragmentPlantDetailBinding
     @Inject
-    override lateinit var navigationController: NavController
+    lateinit var navigator: FragmentNavigator
 
-    private var plantId = 0
+    @Inject
+    lateinit var articlesFeedViewModelFactory: PlantDetailsViewModel.PlantDetailsViewModelFactory
+    override lateinit var navigationController: NavController
+    private lateinit var viewBinding: FragmentPlantDetailBinding
+
+    override val viewModel: PlantDetailsViewModel by viewModels {
+
+        PlantDetailsViewModel.providesFactory(
+            assistedFactory = articlesFeedViewModelFactory,
+            plantId = PlantDetailFragmentArgs.fromBundle(requireArguments()).plantId
+        )
+
+    }
 
     private val decimalFormatFormat = DecimalFormat("#.00")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewBinding = FragmentPlantDetailBinding.bind(view)
+        navigationController = navigator.getNaveHostFragment(view)
 
         initialization()
         observePlantDetails()
@@ -35,17 +47,6 @@ class PlantDetailFragment : BaseFragment(R.layout.fragment_plant_detail) {
     }
 
     private fun initialization(){
-
-        fragmentSubComponent = injector.fragmentComponent().create(requireView())
-        fragmentSubComponent.inject(this)
-
-
-        arguments?.also {
-
-            plantId = PlantDetailFragmentArgs.fromBundle(it).plantId
-            viewModel = fragmentSubComponent.plantDetailsViewModel.create(plantId)
-        }
-
 
         super.initialization({ onDataProcessing() },
             { onDataProcessingComplete() },

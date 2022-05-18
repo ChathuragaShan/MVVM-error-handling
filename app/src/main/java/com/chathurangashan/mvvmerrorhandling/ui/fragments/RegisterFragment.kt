@@ -4,29 +4,31 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.databinding.FragmentRegisterBinding
-import com.chathurangashan.mvvmerrorhandling.di.injector
-import com.chathurangashan.mvvmerrorhandling.di.subcomponents.FragmentSubComponent
-import com.chathurangashan.mvvmerrorhandling.di.viewModel
+import com.chathurangashan.mvvmerrorhandling.di.navigation.FragmentNavigator
 import com.chathurangashan.mvvmerrorhandling.utilities.OperationError
 import com.chathurangashan.mvvmerrorhandling.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class RegisterFragment : BaseFragment(R.layout.fragment_register) {
 
     @Inject
+    lateinit var navigator: FragmentNavigator
     override lateinit var navigationController: NavController
-    override val viewModel by viewModel { fragmentSubComponent.registerViewModel }
-
-    private lateinit var fragmentSubComponent: FragmentSubComponent
     private lateinit var viewBinding: FragmentRegisterBinding
+
+    override val viewModel : RegisterViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewBinding = FragmentRegisterBinding.bind(view)
+        navigationController = navigator.getNaveHostFragment(view)
 
         initialization()
         observeRegisterStatus()
@@ -40,8 +42,6 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
 
     private fun initialization() {
 
-        fragmentSubComponent = injector.fragmentComponent().create(requireView())
-        fragmentSubComponent.inject(this)
 
         super.initialization({ onDataProcessing() },
             { onDataProcessingCompleteOrError() },

@@ -8,11 +8,13 @@ import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
 import com.chathurangashan.mvvmerrorhandling.repositories.RegisterRepository
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 
+@HiltViewModel
 class RegisterViewModel @Inject constructor(private val repository: RegisterRepository)
     :BaseViewModel(repository) {
 
