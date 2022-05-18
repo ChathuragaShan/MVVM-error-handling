@@ -4,15 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.chathurangashan.mvvmerrorhandling.R
-import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
+import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
 import com.chathurangashan.mvvmerrorhandling.repositories.RegisterRepository
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 
+@HiltViewModel
 class RegisterViewModel @Inject constructor(private val repository: RegisterRepository)
     :BaseViewModel(repository) {
 
@@ -100,8 +102,7 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
     /**
      * Function responsible for doing form validation before make the register network call
      *
-     * @param requestBody: request body data which contains user entered form details.
-     * @return
+     * @param requestBody: request body data which contains user entered form details
      */
     fun validateRegisterForm(requestBody: RegisterRequest) {
 

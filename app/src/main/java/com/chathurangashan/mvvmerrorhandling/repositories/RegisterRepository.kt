@@ -1,8 +1,7 @@
 package com.chathurangashan.mvvmerrorhandling.repositories
 
 import androidx.lifecycle.MutableLiveData
-import com.chathurangashan.mvvmerrorhandling.R
-import com.chathurangashan.mvvmerrorhandling.data.moshi.RegisterRequest
+import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
 import com.chathurangashan.mvvmerrorhandling.network.ApiService
 import com.chathurangashan.mvvmerrorhandling.utilities.SingleLiveEvent
 import com.chathurangashan.mvvmerrorhandling.viewmodel.RegisterViewModel

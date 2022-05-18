@@ -3,12 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/registerFragment"
+        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.WelcomeFragment"
+        android:label="Welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/to_register"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/to_plants"
+            app:destination="@id/plantsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantsFragment"
+        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.PlantsFragment"
+        android:label="Plants"
+        tools:layout="@layout/fragment_plants" >
+        <action
+            android:id="@+id/to_plant_details"
+            app:destination="@id/plantDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantDetailFragment"
+        android:name="com.chathurangashan.mvvmerrorhandling.ui.fragments.PlantDetailFragment"
+        android:label="Plant Details"
+        tools:layout="@layout/fragment_plant_detail">
+        <argument
+            android:name="plant_Id"
+            app:argType="integer" />
     </fragment>
 </navigation>
