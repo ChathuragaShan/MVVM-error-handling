@@ -16,7 +16,7 @@ class PlantDetailsRepository @Inject constructor(private val apiService: ApiServ
 
     suspend fun getPlantDetails(plantId: Int) {
 
-        try {
+        processApiResult {
 
             val response = apiService.getPlantDetails(plantId)
 
@@ -32,15 +32,6 @@ class PlantDetailsRepository @Inject constructor(private val apiService: ApiServ
 
             }
 
-        } catch (exception: Exception) {
-
-            when (exception) {
-                is HttpException -> connectionError(exception.message())
-                is ConnectivityInterceptor.NoConnectivityException -> noConnectivityError()
-                is SocketTimeoutException -> timeoutConnectionError()
-                is IOException -> processingError()
-                else -> processingError()
-            }
         }
 
     }

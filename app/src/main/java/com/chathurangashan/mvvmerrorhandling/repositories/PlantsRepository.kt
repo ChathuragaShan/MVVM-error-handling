@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.chathurangashan.mvvmerrorhandling.data.general.Plant
 import com.chathurangashan.mvvmerrorhandling.network.ApiService
 import com.chathurangashan.mvvmerrorhandling.network.ConnectivityInterceptor
+import kotlinx.coroutines.coroutineScope
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -14,9 +15,9 @@ class PlantsRepository @Inject constructor(private val apiService: ApiService) :
 
     val plantsLiveData = MutableLiveData<List<Plant>>()
 
-    suspend fun getPlants() {
+    suspend fun getPlants(){
 
-        try {
+        processApiResult {
 
             val response = apiService.getPlants()
 
@@ -32,19 +33,9 @@ class PlantsRepository @Inject constructor(private val apiService: ApiService) :
                 plantsLiveData.value = plantList
 
             } else {
-
                 responseError(response.message)
             }
 
-        }catch (exception: Exception){
-
-            when (exception) {
-                is HttpException -> connectionError(exception.message())
-                is ConnectivityInterceptor.NoConnectivityException -> noConnectivityError()
-                is SocketTimeoutException -> timeoutConnectionError()
-                is IOException -> processingError()
-                else -> processingError()
-            }
         }
     }
 }

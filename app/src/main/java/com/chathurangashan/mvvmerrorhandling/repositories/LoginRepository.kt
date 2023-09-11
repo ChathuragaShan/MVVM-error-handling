@@ -18,7 +18,7 @@ class LoginRepository @Inject constructor(private val apiService: ApiService): B
 
     suspend fun login(loginRequest: LoginRequest){
 
-        try {
+        processApiResult {
 
             val response = apiService.userLogin(loginRequest)
 
@@ -39,16 +39,6 @@ class LoginRepository @Inject constructor(private val apiService: ApiService): B
                 }
 
                 responseError(response.message, errors)
-            }
-
-        } catch (exception: Exception) {
-
-            when (exception) {
-                is HttpException -> connectionError(exception.message())
-                is ConnectivityInterceptor.NoConnectivityException -> noConnectivityError()
-                is SocketTimeoutException -> timeoutConnectionError()
-                is IOException -> processingError()
-                else -> processingError()
             }
 
         }

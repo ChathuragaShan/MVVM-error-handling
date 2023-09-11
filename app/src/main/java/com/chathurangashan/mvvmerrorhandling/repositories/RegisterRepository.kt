@@ -18,7 +18,7 @@ class RegisterRepository @Inject constructor(private val apiService: ApiService)
 
     suspend fun registerUser(requestBody: RegisterRequest) {
 
-        try {
+        processApiResult {
             val response = apiService.registerUsers(requestBody)
 
             if (response.status) {
@@ -40,17 +40,6 @@ class RegisterRepository @Inject constructor(private val apiService: ApiService)
                 responseError(response.message, errors)
             }
 
-        } catch (exception: Exception) {
-
-            when (exception) {
-                is HttpException -> connectionError(exception.message())
-                is ConnectivityInterceptor.NoConnectivityException -> noConnectivityError()
-                is SocketTimeoutException -> timeoutConnectionError()
-                is IOException -> processingError()
-                else -> processingError()
-            }
-
         }
-
     }
 }
