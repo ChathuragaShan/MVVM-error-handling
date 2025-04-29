@@ -23,7 +23,7 @@ class PlantDetailsViewModel @AssistedInject constructor(
 
     init{
 
-        plantsDetailLiveData = Transformations.map(repository.plantDetailLiveData){
+        plantsDetailLiveData = repository.plantDetailLiveData.map{
             isProcessing.value = ProcessingStatus.COMPLETED
             return@map it
         }

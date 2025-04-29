@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.squareup.retrofit2:converter-moshi:2.4.0">
+  <library name="Gradle: com.squareup.retrofit2:converter-moshi:2.4.0" external-system-id="GRADLE">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-moshi/2.4.0/88547f3071e6e8d52bb5c92f57055897a18bb135/converter-moshi-2.4.0.jar!/" />
     </CLASSES>

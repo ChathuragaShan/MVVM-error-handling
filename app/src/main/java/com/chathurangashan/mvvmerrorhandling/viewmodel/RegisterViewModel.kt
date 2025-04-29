@@ -1,7 +1,7 @@
 package com.chathurangashan.mvvmerrorhandling.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.moshi.requests.RegisterRequest
@@ -21,7 +21,7 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
     val registerStatusLiveData : LiveData<SingleLiveEvent<String>>
 
     init {
-        registerStatusLiveData = Transformations.map(repository.registerLiveData){
+        registerStatusLiveData = repository.registerLiveData.map{
             isProcessing.value = ProcessingStatus.COMPLETED
             return@map it
         }

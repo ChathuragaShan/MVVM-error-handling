@@ -3,18 +3,18 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 35
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.chathurangashan.mvvmerrorhandling"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
 
@@ -31,45 +31,57 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures {
         viewBinding = true
     }
+    namespace 'com.chathurangashan.mvvmerrorhandling'
 }
 
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.activity:activity-ktx:1.2.3'
-    implementation 'androidx.fragment:fragment-ktx:1.3.3'
+    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.activity:activity-ktx:1.10.1'
+    implementation 'androidx.fragment:fragment-ktx:1.8.6'
+
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+
 
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     //coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
     // Hilt dependencies
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     //ViewModel and LiveData
-    def lifecycle_version = "2.2.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    def lifecycle_version = "2.8.7"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
 
     //Navigation
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+
+    //Navigation Compose
+    implementation "androidx.navigation:navigation-compose:$navigation_version"
 
     //Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -85,10 +97,10 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
     //Moshi
-    def moshi_version = "1.9.2"
+    def moshi_version = "1.15.0"
     implementation "com.squareup.moshi:moshi:$moshi_version"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
-    implementation "com.squareup.retrofit2:converter-moshi:2.4.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
 
     //Picaso
     implementation 'com.squareup.picasso:picasso:2.71828'

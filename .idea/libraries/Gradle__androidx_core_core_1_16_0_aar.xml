@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.core:core:1.16.0@aar" external-system-id="GRADLE">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/e3f5105217f4a966e67682ec044659df/transformed/core-1.16.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/e3f5105217f4a966e67682ec044659df/transformed/core-1.16.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/e3f5105217f4a966e67682ec044659df/transformed/core-1.16.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/e3f5105217f4a966e67682ec044659df/transformed/core-1.16.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.16.0/98be8159402f60aa12f9a0914d3136ccb5b0aef0/core-1.16.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.16.0/7a746abb87119c59f68b3274f0692e3a0390a4aa/core-1.16.0-samples-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

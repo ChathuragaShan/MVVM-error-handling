@@ -1,7 +1,7 @@
 package com.chathurangashan.mvvmerrorhandling.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.chathurangashan.mvvmerrorhandling.R
 import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
@@ -21,7 +21,7 @@ class LoginViewModel @Inject constructor(val repository: LoginRepository): BaseV
 
     init {
 
-        loginStatusLiveData = Transformations.map(repository.loginLiveData){
+        loginStatusLiveData = repository.loginLiveData.map{
             isProcessing.value = ProcessingStatus.COMPLETED
             return@map it
         }

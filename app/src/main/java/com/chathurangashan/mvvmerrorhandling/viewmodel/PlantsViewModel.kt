@@ -1,7 +1,7 @@
 package com.chathurangashan.mvvmerrorhandling.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.chathurangashan.mvvmerrorhandling.data.enums.ProcessingStatus
 import com.chathurangashan.mvvmerrorhandling.data.general.Plant
@@ -17,7 +17,7 @@ class PlantsViewModel @Inject constructor(val repository: PlantsRepository): Bas
 
     init {
 
-        plantsLiveData = Transformations.map(repository.plantsLiveData){
+        plantsLiveData = repository.plantsLiveData.map{
             isProcessing.value = ProcessingStatus.COMPLETED
             return@map it
         }

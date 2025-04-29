@@ -10,7 +10,6 @@ import com.chathurangashan.mvvmerrorhandling.di.navigation.FragmentNavigator
 import com.chathurangashan.mvvmerrorhandling.viewmodel.PlantDetailsViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import java.text.DecimalFormat
 import javax.inject.Inject
 
@@ -57,15 +56,15 @@ class PlantDetailFragment : BaseFragment(R.layout.fragment_plant_detail) {
 
         viewModel.plantsDetailLiveData.observe(viewLifecycleOwner){
 
-            plantName.text = it.name
-            plantPrice.text = "$ ${decimalFormatFormat.format(it.price)}"
-            plantDescription.text = getString(it.description)
-            Picasso.get().load(it.image).into(plantImageView)
-            size1button.text = it.sizes[0]
-            size1button.text = it.sizes[1]
-            planter1Button.text = it.planters[0]
-            planter2Button.text = it.planters[1]
-            planter3Button.text = it.planters[2]
+            viewBinding.plantName.text = it.name
+            viewBinding.plantPrice.text = "$ ${decimalFormatFormat.format(it.price)}"
+            viewBinding.plantDescription.text = getString(it.description)
+            Picasso.get().load(it.image).into(viewBinding.plantImageView)
+            viewBinding.size1button.text = it.sizes[0]
+            viewBinding.size1button.text = it.sizes[1]
+            viewBinding.planter1Button.text = it.planters[0]
+            viewBinding.planter2Button.text = it.planters[1]
+            viewBinding.planter3Button.text = it.planters[2]
         }
     }
 

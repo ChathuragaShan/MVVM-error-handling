@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.lifecycle:lifecycle-viewmodel-android:2.8.3@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/947a764734ae19e0b862a16d99ea568d/transformed/jetified-lifecycle-viewmodel-release/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/947a764734ae19e0b862a16d99ea568d/transformed/jetified-lifecycle-viewmodel-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/947a764734ae19e0b862a16d99ea568d/transformed/jetified-lifecycle-viewmodel-release/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-viewmodel-android/2.8.3/f394e7f6091e5e3e30d57b7d6087ac5995fe039c/lifecycle-viewmodel-android-2.8.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

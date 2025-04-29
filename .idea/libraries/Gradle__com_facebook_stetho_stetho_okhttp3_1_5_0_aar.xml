@@ -1,8 +1,8 @@
 <component name="libraryTable">
-  <library name="Gradle: com.facebook.stetho:stetho-okhttp3:1.5.0@aar">
+  <library name="Gradle: com.facebook.stetho:stetho-okhttp3:1.5.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2dcb8a42568791ea0780b6eb1a9fb9df/jetified-stetho-okhttp3-1.5.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2dcb8a42568791ea0780b6eb1a9fb9df/jetified-stetho-okhttp3-1.5.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/46edea99cb288b213af484bc7ae77093/transformed/jetified-stetho-okhttp3-1.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/46edea99cb288b213af484bc7ae77093/transformed/jetified-stetho-okhttp3-1.5.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.stetho/stetho-okhttp3/1.5.0/3b146571932ff4eb84f8997a15330c591167f09/stetho-okhttp3-1.5.0-javadoc.jar!/" />
